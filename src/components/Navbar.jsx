@@ -4,13 +4,16 @@ import { IoMdArrowDropup } from "react-icons/io";
 import { useState } from "react";
 import DropDown from "./DropDown";
 import supabase from "../utils/supabase";
+import { useNavigate } from "react-router";
 
 const Navbar = () => {
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
+  const navigate = useNavigate();
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
     setIsDropDownOpen(false);
+    navigate("/");
   };
 
   const user = useSelector((store) => {

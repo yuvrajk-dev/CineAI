@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import Footer from "../components/Footer";
 import { validateAuth } from "../utils/validation";
 import supabase from "../utils/supabase";
-// import { useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 
 const Auth = () => {
   const [loading, setLoading] = useState(false);
@@ -16,7 +16,7 @@ const Auth = () => {
   const email = useRef(null);
   const password = useRef(null);
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     localStorage.setItem("isLogin", isLogin);
@@ -50,6 +50,7 @@ const Auth = () => {
           .insert({ id: data.user.id, username: username.current.value });
 
         if (profileError) throw profileError;
+        navigate("/main");
       } else {
         const { error } = await supabase.auth.signInWithPassword({
           email: email.current.value,
@@ -57,6 +58,7 @@ const Auth = () => {
         });
 
         if (error) throw error;
+        navigate("/main");
       }
     } catch (error) {
       setErrors((prev) => ({

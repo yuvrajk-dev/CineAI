@@ -1,4 +1,4 @@
-import { Outlet, useNavigate } from "react-router";
+import { Outlet } from "react-router";
 import Navbar from "../components/Navbar";
 import { useEffect } from "react";
 import supabase from "../utils/supabase";
@@ -6,7 +6,6 @@ import { addUser, removeUser } from "../utils/userSlice";
 import { useDispatch } from "react-redux";
 
 const Home = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const fetchProfile = async (id) => {
     const { data, error } = await supabase
@@ -33,7 +32,6 @@ const Home = () => {
       username: profile.username,
     };
     dispatch(addUser(user));
-    navigate("/main");
   };
 
   useEffect(() => {
@@ -44,7 +42,6 @@ const Home = () => {
         handleUser(session.user);
       } else {
         dispatch(removeUser());
-        navigate("/");
       }
     });
 
