@@ -6,7 +6,7 @@ import DropDown from "./DropDown";
 import supabase from "../utils/supabase";
 import { useNavigate } from "react-router";
 
-const Navbar = () => {
+const Navbar = ({ isloadingMainPage }) => {
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -26,7 +26,7 @@ const Navbar = () => {
         <span className="text-(--primary)">Cine</span>
         <span className="text-white">AI</span>
       </h1>
-      {user && (
+      {isloadingMainPage && (
         <div className="relative">
           <div
             onClick={() => {

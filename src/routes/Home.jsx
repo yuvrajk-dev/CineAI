@@ -1,11 +1,12 @@
 import { Outlet } from "react-router";
 import Navbar from "../components/Navbar";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import supabase from "../utils/supabase";
 import { addUser, removeUser } from "../utils/userSlice";
 import { useDispatch } from "react-redux";
 
 const Home = () => {
+  const [isloadingMainPage, setIsLoadingMainPage] = useState(false);
   const dispatch = useDispatch();
   const fetchProfile = async (id) => {
     const { data, error } = await supabase
@@ -18,6 +19,8 @@ const Home = () => {
       console.error(error);
       return null;
     }
+
+    setIsLoadingMainPage(true);
 
     return data;
   };
@@ -51,7 +54,7 @@ const Home = () => {
   }, []);
   return (
     <div className=" ">
-      <Navbar />
+      <Navbar isloadingMainPage={isloadingMainPage} />
       <Outlet />
     </div>
   );
