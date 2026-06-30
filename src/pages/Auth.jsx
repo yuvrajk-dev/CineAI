@@ -2,9 +2,10 @@ import { useEffect, useRef, useState } from "react";
 import Footer from "../components/Footer";
 import { validateAuth } from "../utils/validation";
 import supabase from "../utils/supabase";
-import { useNavigate } from "react-router";
+// import { useNavigate } from "react-router";
 
 const Auth = () => {
+  const [loading, setLoading] = useState(false);
   const [isLogin, setIsLogin] = useState(() => {
     const value = localStorage.getItem("isLogin");
     return value === null ? true : value === "true";
@@ -15,7 +16,7 @@ const Auth = () => {
   const email = useRef(null);
   const password = useRef(null);
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   useEffect(() => {
     localStorage.setItem("isLogin", isLogin);
@@ -35,6 +36,7 @@ const Auth = () => {
     if (Object.keys(ValidationError).length > 0) return;
 
     try {
+      setLoading(true);
       if (!isLogin) {
         const { data, error } = await supabase.auth.signUp({
           email: email.current.value,
@@ -48,8 +50,6 @@ const Auth = () => {
           .insert({ id: data.user.id, username: username.current.value });
 
         if (profileError) throw profileError;
-
-        navigate("/main");
       } else {
         const { error } = await supabase.auth.signInWithPassword({
           email: email.current.value,
@@ -57,17 +57,14 @@ const Auth = () => {
         });
 
         if (error) throw error;
-        navigate("/main");
       }
-
-      // navigat
     } catch (error) {
       setErrors((prev) => ({
         ...prev,
         authError: error.message,
       }));
     } finally {
-      // rfs
+      setLoading(false);
     }
   };
 
@@ -163,8 +160,9 @@ const Auth = () => {
                 </p>
               )}
               <button
+                disabled={loading}
                 type="submit"
-                className="w-full bg-(--primary) text-white py-3 rounded-lg font-semibold cursor-pointer hover:opacity-90 transition"
+                className="w-full bg-(--primary) disabled:opacity-60 disabled:cursor-not-allowed text-white py-3 rounded-lg font-semibold cursor-pointer hover:opacity-90 transition"
               >
                 {isLogin ? "Login" : "Create Account"}
               </button>
