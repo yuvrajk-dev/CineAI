@@ -50,7 +50,7 @@ const Auth = () => {
           .insert({ id: data.user.id, username: username.current.value });
 
         if (profileError) throw profileError;
-        navigate("/main");
+        navigate("/dashboard");
       } else {
         const { error } = await supabase.auth.signInWithPassword({
           email: email.current.value,
@@ -58,7 +58,7 @@ const Auth = () => {
         });
 
         if (error) throw error;
-        navigate("/main");
+        navigate("/dashboard");
       }
     } catch (error) {
       setErrors((prev) => ({

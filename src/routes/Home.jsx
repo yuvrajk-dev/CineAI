@@ -1,61 +1,17 @@
 import { Outlet } from "react-router";
 import Navbar from "../components/Navbar";
-import { useEffect, useState } from "react";
-import supabase from "../utils/supabase";
-import { addUser, removeUser } from "../utils/userSlice";
-import { useDispatch } from "react-redux";
+import Auth from "../pages/Auth";
 
 const Home = () => {
-  const [isloadingMainPage, setIsLoadingMainPage] = useState(false);
-  const dispatch = useDispatch();
-  const fetchProfile = async (id) => {
-    const { data, error } = await supabase
-      .from("profiles")
-      .select("*")
-      .eq("id", id)
-      .maybeSingle();
-
-    if (error) {
-      console.error(error);
-      return null;
-    }
-
-    setIsLoadingMainPage(true);
-
-    return data;
-  };
-
-  const handleUser = async (authUser) => {
-    const profile = await fetchProfile(authUser.id);
-    if (!profile) return;
-
-    const user = {
-      id: authUser.id,
-      email: authUser.email,
-      username: profile.username,
-    };
-    dispatch(addUser(user));
-  };
-
-  useEffect(() => {
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((event, session) => {
-      if (session?.user) {
-        handleUser(session.user);
-      } else {
-        dispatch(removeUser());
-      }
-    });
-
-    return () => {
-      subscription.unsubscribe();
-    };
-  }, []);
   return (
     <div className=" ">
-      <Navbar isloadingMainPage={isloadingMainPage} />
-      <Outlet />
+      <nav className="w-full absolute h-20 px-6 md:px-20 flex items-center justify-between from-black bg-linear-to-b ">
+        <h1 className="text-4xl md:text-5xl font-bold">
+          <span className="text-(--primary)">Cine</span>
+          <span className="text-white">AI</span>
+        </h1>
+      </nav>
+      <Auth />
     </div>
   );
 };

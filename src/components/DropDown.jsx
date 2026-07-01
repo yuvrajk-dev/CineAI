@@ -1,5 +1,3 @@
-import React from "react";
-
 const DropDown = ({ onLogout, email }) => {
   return (
     <div className="absolute right-0 top-14 w-44  backdrop-blur-md bg-black/50 border border-white/10 rounded-2xl  shadow-xl">
