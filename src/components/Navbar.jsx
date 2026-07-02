@@ -5,7 +5,7 @@ import DropDown from "./DropDown";
 import supabase from "../utils/supabase";
 import { useNavigate } from "react-router";
 
-const Navbar = () => {
+const Navbar = ({ email, username }) => {
   const [isDropDownOpen, setIsDropDownOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -30,16 +30,16 @@ const Navbar = () => {
           className="flex items-center cursor-pointer gap-3 bg-white/10 backdrop-blur-md border border-white/10 rounded-2xl px-3 py-1"
         >
           <div className="w-9 h-9 rounded-full bg-(--primary) flex items-center justify-center font-semibold text-white">
-            {/* {user.username?.[0]?.toUpperCase()} */}nj
+            {username?.[0]?.toUpperCase()}
           </div>
 
           <span className="text-white font-medium hidden sm:block">
-            {/* {user.username} */} jb
+            {username}
           </span>
 
           {isDropDownOpen ? <IoMdArrowDropup /> : <IoMdArrowDropdown />}
         </div>
-        {isDropDownOpen && <DropDown onLogout={handleLogout} />}
+        {isDropDownOpen && <DropDown onLogout={handleLogout} email={email} />}
       </div>
     </nav>
   );
