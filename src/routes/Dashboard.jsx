@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import Main from "../pages/Main";
 import supabase from "../utils/supabase";
 import ShimmerNavbar from "../shimmer/ShimmerNavbar";
+import { Navigate } from "react-router";
 
 const Dashboard = () => {
   const [loading, setLoading] = useState(true);
@@ -45,14 +46,16 @@ const Dashboard = () => {
         <Main />
       </div>
     );
-  } else {
-    return (
-      <div>
-        <Navbar email={user?.email} id={user?.id} username={user?.username} />
-        <Main />
-      </div>
-    );
   }
+
+  if (!user) return <Navigate to="/" replace />;
+
+  return (
+    <div>
+      <Navbar email={user?.email} id={user?.id} username={user?.username} />
+      <Main />
+    </div>
+  );
 };
 
 export default Dashboard;

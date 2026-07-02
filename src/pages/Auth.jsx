@@ -22,6 +22,21 @@ const Auth = () => {
     localStorage.setItem("isLogin", isLogin);
   }, [isLogin]);
 
+  useEffect(() => {
+    const checkSession = async () => {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+
+      if (session?.user) {
+        navigate("/dashboard", { replace: true });
+        return;
+      }
+    };
+
+    checkSession();
+  }, [navigate]);
+
   const handleAuth = async (e) => {
     e.preventDefault();
     const ValidationError = validateAuth(
@@ -45,12 +60,16 @@ const Auth = () => {
 
         if (error) throw error;
 
+        if (!data.user) {
+          throw new Error("Failed to create account");
+        }
+
         const { error: profileError } = await supabase
           .from("profiles")
           .insert({ id: data.user.id, username: username.current.value });
 
         if (profileError) throw profileError;
-        navigate("/dashboard");
+        navigate("/dashboard", { replace: true });
       } else {
         const { error } = await supabase.auth.signInWithPassword({
           email: email.current.value,
@@ -58,7 +77,7 @@ const Auth = () => {
         });
 
         if (error) throw error;
-        navigate("/dashboard");
+        navigate("/dashboard", { replace: true });
       }
     } catch (error) {
       setErrors((prev) => ({
