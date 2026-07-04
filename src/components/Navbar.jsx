@@ -16,7 +16,7 @@ const Navbar = ({ email, username }) => {
   };
 
   return (
-    <nav className="w-full absolute h-20 px-6 md:px-20 flex items-center justify-between from-black bg-linear-to-b ">
+    <nav className="w-full z-999 absolute h-20 px-6 md:px-20 flex items-center justify-between from-black bg-linear-to-b ">
       <h1 className="text-4xl md:text-5xl font-bold">
         <span className="text-(--primary)">Cine</span>
         <span className="text-white">AI</span>
