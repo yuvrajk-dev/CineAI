@@ -29,7 +29,7 @@ const Auth = () => {
       } = await supabase.auth.getSession();
 
       if (session?.user) {
-        navigate("/dashboard", { replace: true });
+        navigate("/browse", { replace: true });
         return;
       }
     };
@@ -69,7 +69,7 @@ const Auth = () => {
           .insert({ id: data.user.id, username: username.current.value });
 
         if (profileError) throw profileError;
-        navigate("/dashboard", { replace: true });
+        navigate("/browse", { replace: true });
       } else {
         const { error } = await supabase.auth.signInWithPassword({
           email: email.current.value,
@@ -77,7 +77,7 @@ const Auth = () => {
         });
 
         if (error) throw error;
-        navigate("/dashboard", { replace: true });
+        navigate("/browse", { replace: true });
       }
     } catch (error) {
       setErrors((prev) => ({

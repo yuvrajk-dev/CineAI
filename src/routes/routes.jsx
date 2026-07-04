@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router";
 import Home from "./Home";
-import Dashboard from "./Dashboard";
+import Browse from "./Browse";
 
 const appRouter = createBrowserRouter([
   {
@@ -8,8 +8,8 @@ const appRouter = createBrowserRouter([
     element: <Home />,
   },
   {
-    path: "/dashboard",
-    element: <Dashboard />,
+    path: "/browse",
+    element: <Browse />,
   },
 ]);
 export default appRouter;
