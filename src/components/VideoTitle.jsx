@@ -1,4 +1,3 @@
-import React from "react";
 import { FaPlay, FaInfoCircle } from "react-icons/fa";
 
 const VideoTitle = ({ title, overview }) => {
