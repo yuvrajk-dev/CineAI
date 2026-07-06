@@ -5,7 +5,6 @@ import TrailerVideoShimmer from "../shimmer/TrailerVideoShimmer";
 const VideoBackground = ({ movieId }) => {
   useTrailer(movieId);
   const data = useSelector((store) => store.movies.trailer);
-  // console.log(data);
 
   if (!data) {
     return <TrailerVideoShimmer />;

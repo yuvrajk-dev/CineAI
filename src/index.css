@@ -3,6 +3,9 @@
 * {
   box-sizing: border-box;
 }
+html {
+  scrollbar-gutter: stable;
+}
 
 :root {
   /* Fallback HSL */
