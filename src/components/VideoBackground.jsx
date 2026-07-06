@@ -5,16 +5,16 @@ import TrailerVideoShimmer from "../shimmer/TrailerVideoShimmer";
 const VideoBackground = ({ movieId }) => {
   useTrailer(movieId);
   const data = useSelector((store) => store.movies.trailer);
-  console.log(data);
+  // console.log(data);
 
   if (!data) {
     return <TrailerVideoShimmer />;
   }
   return (
-    <div className="   ">
+    <div className=" relative  ">
       <iframe
         className="w-full aspect-video pointer-events-none"
-        src={`https://www.youtube.com/embed/${data.key}?autoplay=1&mute=1&controls=0&cc_load_policy=0&iv_load_policy=3&modestbranding=1&rel=0&loop=1&playlist=${data.key}`}
+        src={`https://www.youtube.com/embed/${data.key}?autoplay=1&mute=1&controls=0&loop=1&playlist=${data.key}&cc_load_policy=0`}
         title="Trailer"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         frameBorder="0"
