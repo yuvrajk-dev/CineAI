@@ -6,6 +6,9 @@ import useFetchUser from "../hooks/useFetchUser";
 import useNowPlayingMovies from "../hooks/useNowPlayingMovies";
 import MainContainer from "../components/MainContainer";
 import BrowseContainer from "../components/BrowseContainer";
+import usePopularMovies from "../hooks/usePopularMovies";
+import useTopRatedMovies from "../hooks/useTopRatedMovies";
+import useUpcomingMovies from "../hooks/useUpcomingMovies";
 
 const Browse = () => {
   const [loading, setLoading] = useState(true);
@@ -13,6 +16,9 @@ const Browse = () => {
 
   useFetchUser(setUser, setLoading);
   useNowPlayingMovies();
+  usePopularMovies();
+  useTopRatedMovies();
+  useUpcomingMovies();
 
   if (loading) {
     return (
