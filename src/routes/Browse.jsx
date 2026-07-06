@@ -9,10 +9,15 @@ import BrowseContainer from "../components/BrowseContainer";
 import usePopularMovies from "../hooks/usePopularMovies";
 import useTopRatedMovies from "../hooks/useTopRatedMovies";
 import useUpcomingMovies from "../hooks/useUpcomingMovies";
+import { useSelector } from "react-redux";
+import GptSearch from "../components/GptSearch";
+import MainContainerShimmer from "../shimmer/MainContainerShimmer";
+import BrowseContainerShimmer from "../shimmer/BrowseContainerShimmer";
 
 const Browse = () => {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
+  const viewSearch = useSelector((store) => store.gpt.showGptSearch);
 
   useFetchUser(setUser, setLoading);
   useNowPlayingMovies();
@@ -24,6 +29,8 @@ const Browse = () => {
     return (
       <div>
         <ShimmerNavbar />
+        <MainContainerShimmer />
+        <BrowseContainerShimmer />
       </div>
     );
   }
@@ -31,10 +38,16 @@ const Browse = () => {
   if (!user) return <Navigate to="/" replace />;
 
   return (
-    <div className="bg-black">
+    <div className="bg-black ">
       <Navbar email={user?.email} id={user?.id} username={user?.username} />
-      <MainContainer />
-      <BrowseContainer />
+      {viewSearch ? (
+        <GptSearch />
+      ) : (
+        <>
+          <MainContainer />
+          <BrowseContainer />
+        </>
+      )}
     </div>
   );
 };
