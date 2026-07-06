@@ -25,7 +25,7 @@ const Browse = () => {
   if (!user) return <Navigate to="/" replace />;
 
   return (
-    <div className="">
+    <div className="bg-black">
       <Navbar email={user?.email} id={user?.id} username={user?.username} />
       <MainContainer />
       <BrowseContainer />

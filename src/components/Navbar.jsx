@@ -1,5 +1,5 @@
 import { IoMdArrowDropdown } from "react-icons/io";
-import { IoMdArrowDropup } from "react-icons/io";
+// import { IoMdArrowDropup } from "react-icons/io";
 import { useState } from "react";
 import DropDown from "./DropDown";
 import supabase from "../utils/supabase";
@@ -22,23 +22,26 @@ const Navbar = ({ email, username }) => {
         <span className="text-white">AI</span>
       </h1>
 
-      <div className="relative">
-        <div
-          onClick={() => {
-            setIsDropDownOpen((prev) => !prev);
-          }}
-          className="flex items-center cursor-pointer gap-3 bg-white/10 backdrop-blur-md border border-white/10 rounded-2xl px-3 py-1"
+      <div className="relative ">
+        <button
+          onClick={() => setIsDropDownOpen((prev) => !prev)}
+          className="flex items-center gap-2 cursor-pointer"
         >
-          <div className="w-9 h-9 rounded-full bg-(--primary) flex items-center justify-center font-semibold text-white">
+          <div className="w-8 h-8 rounded bg-(--primary) flex items-center justify-center text-white font-semibold">
             {username?.[0]?.toUpperCase()}
           </div>
 
-          <span className="text-white font-medium hidden sm:block">
-            {username}
-          </span>
+          <span className="hidden md:block text-white text-sm">{username}</span>
 
-          {isDropDownOpen ? <IoMdArrowDropup /> : <IoMdArrowDropdown />}
-        </div>
+          <div
+            className={`text-white transition-transform duration-200 ${
+              isDropDownOpen ? "rotate-180" : ""
+            }`}
+          >
+            <IoMdArrowDropdown size={20} />
+          </div>
+        </button>
+
         {isDropDownOpen && <DropDown onLogout={handleLogout} email={email} />}
       </div>
     </nav>

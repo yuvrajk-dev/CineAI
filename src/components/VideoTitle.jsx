@@ -2,7 +2,7 @@ import { FaPlay, FaInfoCircle } from "react-icons/fa";
 
 const VideoTitle = ({ title, overview }) => {
   return (
-    <div className="absolute bottom-6 left-4 md:bottom-20 md:left-10 text-white">
+    <div className="absolute bottom-6 left-4 md:bottom-70 md:left-10 text-white">
       <h1 className="text-3xl md:text-6xl font-bold drop-shadow-lg">{title}</h1>
 
       <p className="mt-3 w-[90%] md:w-[40%] text-sm md:text-lg leading-6 md:leading-7 drop-shadow-md line-clamp-3 md:line-clamp-none">
