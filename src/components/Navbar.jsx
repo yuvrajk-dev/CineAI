@@ -42,7 +42,7 @@ const Navbar = ({ email, username }) => {
           <div className="relative ">
             <button
               onClick={() => setIsLangDropDownOpen((prev) => !prev)}
-              className="mr-4 flex rounded bg-black/70 px-2 py-1  text-white"
+              className=" flex rounded bg-black/70 px-2 py-1  text-white"
             >
               <span className="hidden md:block text-white text-sm">
                 {searchLang}
