@@ -18,7 +18,7 @@ html {
 
   --border: hsl(0 0% 22%);
 
-  --primary: hsl(357 92% 47%);
+  --primary: hsl(357, 92%, 47%);
   --warning: hsl(0 60% 65%);
 
   /* OKLCH */
