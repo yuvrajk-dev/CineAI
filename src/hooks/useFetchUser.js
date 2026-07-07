@@ -23,7 +23,7 @@ const useFetchUser = (setData, setLoading) => {
         username: profile.username,
       });
     } catch (error) {
-      console.log(error);
+      // ss
     } finally {
       setLoading(false);
     }
