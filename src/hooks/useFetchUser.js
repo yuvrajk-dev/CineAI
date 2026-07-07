@@ -22,7 +22,7 @@ const useFetchUser = (setData, setLoading) => {
         email: user.email,
         username: profile.username,
       });
-    } catch (error) {
+    } catch {
       // ss
     } finally {
       setLoading(false);

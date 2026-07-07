@@ -137,7 +137,7 @@ const GptSearch = () => {
       {loading && <GptMovieListShimmer />}
       {!loading && gptMovies && (
         <div className="py-6  md:relative md:z-10 px-3 md:px-5">
-          <MovieList title={"CineAI Suggestion"} movies={gptMovies} />
+          <MovieList title={"CineAI Suggestions"} movies={gptMovies} />
         </div>
       )}
     </div>

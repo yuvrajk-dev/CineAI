@@ -1,4 +1,3 @@
-import React from "react";
 import MovieCard from "./MovieCard";
 
 const MovieList = ({ title, movies }) => {
@@ -8,7 +7,7 @@ const MovieList = ({ title, movies }) => {
         <h1 className="text-3xl font-bold  mb-1 pl-10">{title}</h1>
       </div>
       <div className="flex  flex-nowrap gap-3 scrollbar-none  p-4 overflow-x-auto">
-        {movies.map((movie) => (
+        {movies?.map((movie) => (
           <MovieCard key={movie?.id} imgPath={movie?.poster_path} />
         ))}
       </div>

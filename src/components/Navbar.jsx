@@ -1,6 +1,5 @@
 import { IoMdArrowDropdown } from "react-icons/io";
 import { IoSparklesOutline } from "react-icons/io5";
-import { GoHome } from "react-icons/go";
 // import { IoMdArrowDropup } from "react-icons/io";
 import { useState } from "react";
 import DropDown from "./DropDown";

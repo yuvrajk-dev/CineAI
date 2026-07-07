@@ -1,5 +1,3 @@
-import { Outlet } from "react-router";
-import Navbar from "../components/Navbar";
 import Auth from "../pages/Auth";
 
 const Home = () => {
