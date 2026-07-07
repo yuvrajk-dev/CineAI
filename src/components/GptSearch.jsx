@@ -1,13 +1,21 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import lang from "../utils/languageConstants";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import openRouter from "../utils/openRouter";
+import { addGptMovies } from "../utils/gptSlice";
+import MovieList from "./MovieList";
+import fetchGptMovie from "../utils/fetchGptMovie";
+import GptMovieListShimmer from "../shimmer/GptMovieListShimmer";
 
 const GptSearch = () => {
   const language = useSelector((store) => store.gpt.lang);
   const [searchValue, setSearchValue] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const { gptMovies } = useSelector((store) => store.gpt);
 
   const handleSearch = async (e) => {
     e.preventDefault();
@@ -19,6 +27,7 @@ const GptSearch = () => {
       return;
     }
     setLoading(true);
+    dispatch(addGptMovies({ moviesData: null, moviesName: null }));
 
     try {
       const response = await openRouter.chat.send({
@@ -28,7 +37,7 @@ const GptSearch = () => {
             {
               role: "system",
               content:
-                "You are a movie recommendation assistant. Recommend exactly 5 movies. Return ONLY the movie titles separated by commas. Do not include numbering, explanations, or any extra text.",
+                "You are a movie recommendation assistant. Recommend exactly 10 movies based on the user's request. Return ONLY movie titles separated by commas. Example: Interstellar, Arrival, Gravity, The Martian, Contact Do not include years. Do not include numbering. Do not include explanations.  Do not include markdown.",
             },
             {
               role: "user",
@@ -38,10 +47,24 @@ const GptSearch = () => {
         },
       });
 
-      const moviesName = response.choices[0].message.content
-        .split(",")
-        .map((movie) => movie.trim());
-      console.log(moviesName);
+      const content = response.choices?.[0]?.message?.content;
+
+      if (!content) {
+        throw new Error("Invalid AI response");
+      }
+
+      const moviesName = content.split(",").map((movie) => movie.trim());
+
+      if (!moviesName) {
+        throw new Error("Invalid AI response");
+      }
+
+      const movieDataPromises = moviesName.map((movie) => fetchGptMovie(movie));
+
+      const moviesData = (await Promise.all(movieDataPromises)).filter(Boolean);
+
+      dispatch(addGptMovies({ moviesData, moviesName }));
+
       setSearchValue("");
     } catch (err) {
       if (err.statusCode === 429) {
@@ -63,20 +86,22 @@ const GptSearch = () => {
         backgroundPosition: "center",
         backgroundSize: "cover",
       }}
-      className="min-h-screen w-full flex items-center justify-center px-4"
+      className="min-h-screen  w-full flex flex-col items-center px-4  pt-35 md:pt-20"
     >
       <div className="absolute inset-0 bg-black/50" />
 
-      <div className="relative z-10 w-full  max-w-3xl">
-        <h1 className="mb-6 text-center text-3xl md:text-4xl font-bold text-white">
-          {lang[language].heading}
-        </h1>
+      <div className="relative z-10 w-full   max-w-3xl">
+        {!gptMovies && !loading && (
+          <h1 className="mb-6 text-center text-3xl md:text-4xl font-bold text-white">
+            {lang[language].heading}
+          </h1>
+        )}
 
         <form
           onSubmit={handleSearch}
           className="   rounded-md bg-black/70 p-4 md:flex-row"
         >
-          <div className="flex gap-3 flex-col md:flex-row">
+          <div className="flex gap-3 flex-col justify-center items-center md:flex-row">
             <input
               disabled={loading}
               value={searchValue}
@@ -86,13 +111,13 @@ const GptSearch = () => {
               }}
               type="text"
               placeholder={lang[language].placeholder}
-              className="flex-1 rounded-md bg-white px-4 py-3 text-black outline-none"
+              className="flex-1 rounded-md w-full bg-white px-4 py-3 text-black outline-none"
             />
 
             <button
               disabled={loading}
               type="submit"
-              className="w-36 rounded-md bg-(--primary) px-6 py-3 font-semibold text-white transition enabled:hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-70"
+              className="w-36  h-12 flex items-center justify-center rounded-md bg-(--primary) px-6 py-3 font-semibold text-white transition enabled:hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-70"
             >
               {loading ? (
                 <div className="flex items-center justify-center gap-1">
@@ -108,6 +133,13 @@ const GptSearch = () => {
           {error && <p className="text-red-700 pt-1 pl-2 ">{error}</p>}
         </form>
       </div>
+
+      {loading && <GptMovieListShimmer />}
+      {!loading && gptMovies && (
+        <div className="py-6  md:relative md:z-10 px-3 md:px-5">
+          <MovieList title={"CineAI Suggestion"} movies={gptMovies} />
+        </div>
+      )}
     </div>
   );
 };
