@@ -9,7 +9,7 @@ const DropDown = ({ onLogout, email }) => {
 
       <button
         onClick={onLogout}
-        className="w-full px-4 py-3 text-left text-white transition-colors hover:bg-zinc-800"
+        className="w-full px-4 py-3 text-left text-white transition-colors active:bg-zinc-800 hover:bg-zinc-800"
       >
         Sign out of CineAI
       </button>
