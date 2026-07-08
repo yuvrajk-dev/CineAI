@@ -32,7 +32,7 @@ const GptSearch = () => {
     try {
       const response = await openRouter.chat.send({
         chatRequest: {
-          model: "openrouter/free",
+          model: "nvidia/nemotron-nano-12b-v2-vl:free",
           messages: [
             {
               role: "system",
@@ -44,6 +44,8 @@ const GptSearch = () => {
               content: prompt,
             },
           ],
+          max_tokens: 80,
+          temperature: 0.7,
         },
       });
 
