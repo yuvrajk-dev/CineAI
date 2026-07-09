@@ -68,7 +68,7 @@ cd CineAI
 npm install
 ```
 
-### Create a `.env` file
+### Create a `.env.local` file
 
 ```env
 VITE_SUPABASE_URL=your_supabase_url
