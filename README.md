@@ -111,5 +111,3 @@ The application is deployed on **Vercel**.
 
 - GitHub: https://github.com/yuvrajk-dev
 - LinkedIn: https://linkedin.com/in/yuvrajkumar01
-
----
