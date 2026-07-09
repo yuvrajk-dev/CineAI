@@ -1,43 +1,74 @@
-# CineAI
+# 🎬 CineAI – AI-Powered Movie Discovery Platform
 
-CineAI is an AI-powered movie discovery web application built with React, Redux Toolkit, Tailwind CSS, Supabase, TMDB API, and OpenRouter. Users can securely sign in, browse trending movies, watch trailers, and receive personalized movie recommendations using natural language prompts.
 
-## Live Demo
+![React](https://img.shields.io/badge/React-19-blue)
+![Redux Toolkit](https://img.shields.io/badge/Redux-Toolkit-purple)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind-CSS-38BDF8)
+![Supabase](https://img.shields.io/badge/Supabase-Backend-green)
+![Vercel](https://img.shields.io/badge/Deployed-Vercel-black)
 
-https://cineai-web.vercel.app/
+A Netflix-inspired movie discovery platform built with **React.js**, **Redux Toolkit**, **Tailwind CSS**, and **Supabase**. Browse trending movies, watch trailers, and discover personalized movie recommendations using natural language prompts powered by **OpenRouter**.
 
-## Features
+🔗 **Live Demo:** https://cineai-web.vercel.app
 
-- Secure user authentication with Supabase
-- AI-powered movie recommendations using OpenRouter
-- Browse Now Playing, Popular, Top Rated, and Upcoming movies
-- Watch official movie trailers
-- Protected routes for authenticated users
-- Responsive user interface built with Tailwind CSS
-- Loading shimmer states for a smoother user experience
+---
 
-## Tech Stack
+## ✨ Features
 
-- React
-- Redux Toolkit
-- React Router
-- Tailwind CSS
-- Supabase
-- TMDB API
-- OpenRouter
-- Vite
+- 🤖 AI-powered movie recommendations using OpenRouter 
+- 🎥 Featured hero section with autoplay YouTube trailer
+- 🎞️ Browse **Now Playing**, **Popular**, **Top Rated**, and **Upcoming** movies using the TMDB API
+- 🔐 Secure authentication with Supabase Auth
+- 🛡️ Protected routes with persistent user sessions
+- 🗂️ Global state management using Redux Toolkit
+- ⚡ Custom React hooks for reusable data fetching
+- 💀 Skeleton loading screens for a smooth user experience
+- 📱 Fully responsive design across desktop, tablet, and mobile
 
-## Installation
+---
+
+## 🛠️ Tech Stack
+
+| Category | Technology |
+| --- | --- |
+| Frontend | React.js, Redux Toolkit, React Router, Tailwind CSS |
+| Backend & Database | Supabase (PostgreSQL, Authentication, Storage) |
+| APIs | TMDB API, OpenRouter API (Google Gemini), YouTube Embed |
+| Build & Deployment | Vite, Git, GitHub, Vercel |
+
+---
+
+## 📁 Project Structure
+
+```text
+src/
+├── components/     # Reusable UI components
+├── hooks/          # Custom React hooks
+├── pages/          # Route-level components
+├── store/          # Redux Toolkit slices
+├── utils/          # API calls and helper functions
+├── assets/
+└── App.jsx
+```
+
+---
+
+## 🚀 Getting Started
+
+### Clone the repository
 
 ```bash
 git clone https://github.com/yuvrajk-dev/CineAI.git
 cd CineAI
+```
+
+### Install dependencies
+
+```bash
 npm install
 ```
 
-## Environment Variables
-
-Create a `.env.local` file in the project root and add the following variables:
+### Create a `.env` file
 
 ```env
 VITE_SUPABASE_URL=your_supabase_url
@@ -46,16 +77,39 @@ VITE_TMDB_API_KEY=your_tmdb_api_key
 VITE_OPENROUTER_API_KEY=your_openrouter_api_key
 ```
 
-## Run Locally
+### Start the development server
 
 ```bash
 npm run dev
 ```
 
-## Author
+---
+
+## 📸 Screenshots
+
+> soon.
+
+---
+
+## 💡 Why I Built This
+
+I built CineAI to combine modern frontend development with AI-powered recommendations. The project demonstrates authentication, state management, API integration, reusable components, custom hooks, and responsive UI while delivering a smooth movie discovery experience.
+
+---
+
+## 🚀 Deployment
+
+The application is deployed on **Vercel**.
+
+**Live Demo:** https://cineai-web.vercel.app
+
+---
+
+## 👨‍💻 Author
 
 **Yuvraj Kumar**
 
 - GitHub: https://github.com/yuvrajk-dev
-- LinkedIn: https://www.linkedin.com/in/yuvrajkumar01/
-- Email: [yuvrajk.dev@gmail.com](mailto:yuvrajk.dev@gmail.com)
+- LinkedIn: https://linkedin.com/in/yuvrajkumar01
+
+---
