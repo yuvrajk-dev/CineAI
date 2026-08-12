@@ -82,13 +82,6 @@ VITE_OPENROUTER_API_KEY=your_openrouter_api_key
 ```bash
 npm run dev
 ```
-
----
-
-## 📸 Screenshots
-
-> soon.
-
 ---
 
 ## 💡 Why I Built This
